@@ -1,2 +1,3 @@
-FROM alpine:3.5
-CMD echo "Hello World!"
+FROM ubuntu:16.10
+RUN apt-get update && apt-get -y upgrade
+RUN apt-get install -y tahoe-lafs
