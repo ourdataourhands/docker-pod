@@ -1,2 +1,2 @@
-# docker-pod
-The Docker image for a pod.
+# Our Data Our Hands - Docker Image for x86
+This is the Docker image that can run on an x86 based storage pod, whether a device in the wild or an image on your own computer with lots of storage to contribute.
