@@ -2,11 +2,11 @@
 docker_version=$(docker -v)
 infinit_user=$(more /mnt/storage/username)
 odoh_capacity=$(more /mnt/storage/capacity)
-docker_image="odoh-docker-x86"
 [[ -z "$docker_version" ]] && { echo "Docker does not seem to be installed and in your path."; exit 1; }
 [[ -z "$infinit_user" ]] && { echo "ODOH grid user missing."; exit 1; }
 [[ -z "$odoh_capacity" ]] && { echo "ODOH storage node capacity missing."; exit 1; }
-if [ $1 == "purge" ]
+# Purge
+if [ $1 == "purge" ] || [ $2 == "purge" ]
 then
 	echo "============================================"
 	echo "ODOH: Stop and remove all Docker containers"
@@ -20,6 +20,19 @@ then
 	echo "###"
 	echo
 fi
+
+# x86 or ARM
+if [ $1 == "arm" ] 
+then
+	# Docker image ARM
+	cp -f Dockerfile-arm Dockerfile
+	docker_image="odoh-docker-arm"
+else
+	# Default to x86
+	cp -f Dockerfile-x86 Dockerfile
+	docker_image="odoh-docker-x86"
+fi
+
 
 echo "============================================"
 echo "ODOH: Build image"
