@@ -6,17 +6,20 @@ docker_image="odoh-docker-x86"
 [[ -z "$docker_version" ]] && { echo "Docker does not seem to be installed and in your path."; exit 1; }
 [[ -z "$infinit_user" ]] && { echo "ODOH grid user missing."; exit 1; }
 [[ -z "$odoh_capacity" ]] && { echo "ODOH storage node capacity missing."; exit 1; }
-echo "============================================"
-echo "ODOH: Stop and remove all Docker containers"
-docker stop "$(docker ps -a -q)"
-docker rm "$(docker ps -a -q)"
-echo "###"
-echo
-echo "============================================"
-echo "ODOH: Docker prune system"
-docker system prune -f
-echo "###"
-echo
+if [ $1 == "purge" ]
+then
+	echo "============================================"
+	echo "ODOH: Stop and remove all Docker containers"
+	docker stop "$(docker ps -a -q)"
+	docker rm "$(docker ps -a -q)"
+	echo "###"
+	echo
+	echo "============================================"
+	echo "ODOH: Docker prune system"
+	docker system prune -f
+	echo "###"
+	echo
+fi
 
 echo "============================================"
 echo "ODOH: Build image"
