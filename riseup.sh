@@ -6,7 +6,7 @@ odoh_capacity=$(more /mnt/storage/capacity)
 [[ -z "$infinit_user" ]] && { echo "ODOH grid user missing."; exit 1; }
 [[ -z "$odoh_capacity" ]] && { echo "ODOH storage node capacity missing."; exit 1; }
 # Purge
-if [ $1 == "purge" ] || [ $2 == "purge" ]
+if [[ $1 == "purge" ]] || [[ $2 == "purge" ]]
 then
 	echo "============================================"
 	echo "ODOH: Stop and remove all Docker containers"
@@ -22,7 +22,7 @@ then
 fi
 
 # x86 or ARM
-if [ $1 == "arm" ] 
+if [[ $1 == "arm" ]]
 then
 	# Docker image ARM
 	cp -f Dockerfile-arm Dockerfile
