@@ -1,4 +1,4 @@
-FROM	armv7/armhf-ubuntu_core:16.10
+FROM	armv7/armhf-debian:jessie
 RUN 	apt-get update -y
 RUN 	apt-get install -y \
 	fuse \
