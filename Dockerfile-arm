@@ -1,4 +1,4 @@
-FROM	armv7/armhf-ubuntu:16.10
+FROM	armv7/armhf-ubuntu_core:16.10
 RUN 	apt-get update -y
 RUN 	apt-get install -y \
 	fuse \
