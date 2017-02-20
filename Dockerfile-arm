@@ -10,8 +10,8 @@ RUN 	apt-get install -y \
 RUN     mkdir -p /opt/infinit \
 	&&	cd /opt/infinit \
 	&&	curl -q --output infinit.tbz https://storage.googleapis.com/sh_infinit_releases/raspberry/infinit-arm-0.7.3.tar.gz \
-	&&	tar xjf infinit.tbz --strip-components=1 -C . \
-	&&	rm infinit.tbz
+	&&	tar xzf infinit.tgz --strip-components=1 -C . \
+	&&	rm infinit.tgz
 COPY 	pod-setup.sh /root/
 RUN 	chmod +x /root/pod-setup.sh
 RUN 	mkdir -p /root/logs
