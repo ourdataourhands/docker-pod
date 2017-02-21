@@ -24,6 +24,17 @@ echo "###"
 echo
 
 echo "============================================"
+echo "ODOH: Wait for ID generation"	
+while [ ! -f /var/lib/zerotier-one/identity.secret ]; do
+	echo -n "."
+	sleep 1
+done
+echo 
+echo "Success! Your ZeroTier address is [ `cat /var/lib/zerotier-one/identity.public | cut -d : -f 1` ]."
+echo "###"
+echo
+
+echo "============================================"
 echo "ODOH: Join Our Data Our Hands network"
 /usr/sbin/zerotier-cli join e5cd7a9e1c178b15
 echo "###"
