@@ -48,7 +48,6 @@ docker run -it -d \
 	--device=/dev/net/tun \
 	-v /mnt/storage/zerotier-one:/var/lib/zerotier-one \
 	-v /mnt/storage/.local:/root/.local \
-	-v /mnt/storage/griduser:/root/griduser \
 	-v /mnt/storage/logs:/root/logs \
 	--name $docker_image $docker_image /bin/bash
 echo "###"
