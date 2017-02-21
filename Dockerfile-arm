@@ -19,7 +19,7 @@ ENV		PATH="/opt/infinit/bin:${PATH}"
 RUN 	mkdir /tmp/zt \
 	&&	cd /tmp/zt \
 	&&	curl -s --output zerotier.deb http://download.zerotier.com/zerotier-one-armhf.deb \
-	&&	dpkg -i zerotier.deb \
+	&&	dpkg -i --quiet zerotier.deb \
 	&&	apt-get -f install \
 	&&	dpkg -i zerotier.deb \
 	&&	update-rc.d zerotier-one defaults
