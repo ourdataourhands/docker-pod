@@ -1,4 +1,4 @@
-FROM	armv7/armhf-debian:jessie
+FROM	armv7/armhf-ubuntu_core:16.10
 RUN 	apt-get update -y
 RUN 	apt-get install -y \
 	fuse \
@@ -8,7 +8,7 @@ RUN 	apt-get install -y \
 	net-tools
 RUN     mkdir -p /opt/infinit \
 	&&	cd /opt/infinit \
-	&&	curl -q --output infinit.tgz https://storage.googleapis.com/sh_infinit_releases/raspberry/infinit-arm-0.7.3.tar.gz \
+	&&	curl -s --output infinit.tgz https://storage.googleapis.com/sh_infinit_releases/raspberry/infinit-arm-0.7.3.tar.gz \
 	&&	tar xzf infinit.tgz --strip-components=1 -C . \
 	&&	rm infinit.tgz
 COPY 	pod-setup.sh /root/
@@ -16,5 +16,11 @@ RUN 	chmod +x /root/pod-setup.sh
 RUN 	mkdir -p /root/logs
 RUN 	chmod +w /root/logs
 ENV		PATH="/opt/infinit/bin:${PATH}"
-RUN 	curl -s https://install.zerotier.com/ | /bin/bash
+RUN 	mkdir /tmp/zt \
+	&&	cd /tmp/zt \
+	&&	curl -s --output zerotier.deb http://download.zerotier.com/zerotier-one-armhf.deb \
+	&&	dpkg -i zerotier.deb \
+	&&	apt-get -f install \
+	&&	dpkg -i zerotier.deb \
+	&&	update-rc.d zerotier-one defaults
 EXPOSE	9993/udp 6379/udp
