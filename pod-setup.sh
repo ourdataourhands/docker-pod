@@ -66,10 +66,12 @@ if [[ -z "$user_exists" ]]; then
 	# No user with private keys found here. Check for backup.
 	echo "User not found, check for backup"
 	if [[ ! -f "/root/.ssh/griduser" ]]; then
-		echo "No backup found"
-		echo "Please create user"
-		exit 1;
-		# $infinit_bin user create --name $infinit_user --key /root/.ssj/id_rsa --push
+		echo "No backup found, create $infinit_user"
+		echo '' | $infinit_bin user create --name $infinit_user --key /root/.ssj/id_rsa --push
+		echo "Backup user"
+		$infinit_bin user export --full --name $infinit_user --output /root/.ssh/griduser
+		echo "You'll need a passport to activate your storage on the ODOH network"
+
 	else
 		echo "Backup found, restore"
 		$infinit_bin user import --input /root/.ssh/griduser
