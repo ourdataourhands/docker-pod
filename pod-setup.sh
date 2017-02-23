@@ -144,8 +144,11 @@ echo "ODOH: Check for linked network"
 network_linked="$($infinit_bin network list --as $infinit_user | grep $infinit_network | grep -v 'not linked')"
 if [[ -z "$network_linked" ]]; then
 	echo "Link $infinit_network network"
-	link="$infinit_bin network link --as $infinit_user --name $infinit_captain/$infinit_network --storage local | grep 'fatal error'"
-
+	link="$infinit_bin network link --as $infinit_user --name $infinit_captain/$infinit_network --storage local"
+	echo $link
+	if [[ $link == *"fatal error"* ]]; then
+	  exit 1;
+	fi	
 else
 	echo "Found network $network_linked"
 fi
@@ -155,6 +158,12 @@ echo
 # Attach storage
 echo "============================================"
 echo "ODOH: Attach storage to the grid"
-$infinit_bin network run --as $infinit_user --name $infinit_captain/$infinit_network --async --cache --publish
+storage_attached="$infinit_bin network run --as $infinit_user --name $infinit_captain/$infinit_network --async --cache --publish"
+if [[ $storage_attached == *"fatal error"* ]]; then
+  echo "Error attaching storage silo"
+  echo $storage_attached
+  exit 1;
+fi
+echo $storage_attached
 echo "###"
 echo
