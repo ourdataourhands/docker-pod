@@ -1,13 +1,15 @@
 #!/bin/bash
 # Exit on any error
 set -e
-docker_version=$(docker -v)
-infinit_user=$(more /mnt/storage/username)
-odoh_capacity=$(more /mnt/storage/capacity)
+docker_version="$(docker -v)"
+infinit_user="$(cat /mnt/storage/username)"
+odoh_capacity="$(cat /mnt/storage/capacity)"
 
 if [[ -z "$docker_version" ]]; then
 	echo "Docker does not seem to be installed and in your path."
 	exit 1
+else
+	echo "Docker: $docker_version"
 fi
 
 if [[ -z "$infinit_user" ]]; then
