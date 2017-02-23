@@ -1,6 +1,6 @@
 #!/bin/bash
 # Exit on any error
-set -e
+#set -e
 docker_version="$(docker -v)"
 infinit_user="$(cat /mnt/storage/username)"
 odoh_capacity="$(cat /mnt/storage/capacity)"
