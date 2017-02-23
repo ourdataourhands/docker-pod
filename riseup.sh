@@ -40,11 +40,14 @@ if [[ $1 == "purge" ]] || [[ $2 == "purge" ]]; then
 fi
 
 # x86 or ARM
-if [[ $1 == "arm" ]]; then
+arch="$(uname -m |grep arm)"
+if [[ ! -z "$arch" ]]; then
+	echo "ARM! WISE UP, EYES UP, RISE UP!"
 	# Docker image ARM
 	cp -f Dockerfile-arm Dockerfile
 	docker_image="odoh-docker-arm"
 else
+	echo "X86! WISE UP, EYES UP, RISE UP!"
 	# Default to x86
 	cp -f Dockerfile-x86 Dockerfile
 	docker_image="odoh-docker-x86"
