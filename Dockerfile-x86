@@ -1,4 +1,5 @@
 FROM	ubuntu:16.10
+ENV 	DEBIAN_FRONTEND noninteractive
 RUN 	apt-get update -y
 RUN 	apt-get install -y \
 	fuse \
@@ -17,5 +18,14 @@ RUN 	chmod +x /root/pod-setup.sh
 RUN 	mkdir -p /root/logs
 RUN 	chmod +w /root/logs
 ENV		PATH="/opt/infinit/bin:${PATH}"
-RUN 	curl -s https://install.zerotier.com/ | /bin/bash
+RUN 	mkdir /tmp/zt \
+	&&	cd /tmp/zt \
+	&&	apt-get install -y libc6 libgcc1 liblz4-1 libnatpmp1 libstdc++6  init-system-helpers iproute2 \
+	&&	curl -s --output zerotier.deb http://download.zerotier.com/zerotier-one-x86.deb \
+	&&	dpkg -i zerotier.deb \
+	&&	update-rc.d zerotier-one defaults
 EXPOSE	9993/udp 6379/udp
+
+
+
+

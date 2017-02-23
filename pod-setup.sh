@@ -13,8 +13,15 @@ infinit_bin="/opt/infinit/bin/infinit"
 infinit_network="rep3.odoh.io"
 infinit_captain="io.odoh.grid.captain"
 # Check for variables
-[[ -z "$infinit_user" ]] && { echo "ODOH grid user missing."; exit 1; }
-[[ -z "$odoh_capacity" ]] && { echo "ODOH storage node capacity missing."; exit 1; }
+if [[ -z "$infinit_user" ]]; then
+	echo "ODOH grid user missing."
+	exit 1
+fi
+
+if [[ -z "$odoh_capacity" ]]; then
+	echo "ODOH storage node capacity missing."
+	exit 1
+fi
 
 # Zerotier
 echo "============================================"
@@ -54,10 +61,14 @@ echo
 # User
 echo "============================================"
 echo "ODOH: Check for $infinit_user"
-user_exists="$($infinit_bin user list | grep $infinit_user)"
+user_exists="$($infinit_bin user list | grep $infinit_user |grep private)"
 if [[ -z "$user_exists" ]]; then
-	echo "Import $infinit_user"
-	$infinit_bin user import --input /root/griduser
+	# No user with private keys found here. Check for backup.
+	echo "User $infinit_user not found"
+	echo "User $infinit_user not found"
+	backup_exists="$(cat /root/.ssh/griduser)"
+	echo "Create $infinit_user user"
+	$infinit_bin user create --name $infinit_user --key /root/.ssj/id_rsa --push
 else
 	echo "Found $infinit_user"
 fi
