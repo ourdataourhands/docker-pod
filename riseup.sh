@@ -4,12 +4,28 @@ set -e
 docker_version=$(docker -v)
 infinit_user=$(more /mnt/storage/username)
 odoh_capacity=$(more /mnt/storage/capacity)
-[[ -z "$docker_version" ]] && { echo "Docker does not seem to be installed and in your path."; exit 1; }
-[[ -z "$infinit_user" ]] && { echo "ODOH grid user missing."; exit 1; }
-[[ -z "$odoh_capacity" ]] && { echo "ODOH storage node capacity missing."; exit 1; }
+
+if [[ -z "$docker_version" ]]; then
+	echo "Docker does not seem to be installed and in your path."
+	exit 1
+fi
+
+if [[ -z "$infinit_user" ]]; then
+	echo "ODOH username missing."
+	exit 1
+else
+	echo "ODOH username: $infinit_user"
+fi
+
+if [[ -z "$odoh_capacity" ]]; then
+	echo "ODOH storage node capacity missing."
+	exit 1
+else
+	echo "ODOH capacity: $odoh_capacity"
+fi
+
 # Purge
-if [[ $1 == "purge" ]] || [[ $2 == "purge" ]]
-then
+if [[ $1 == "purge" ]] || [[ $2 == "purge" ]]; then
 	echo "============================================"
 	echo "ODOH: Stop and remove all Docker containers"
 	docker stop "$(docker ps -a -q)"
@@ -24,8 +40,7 @@ then
 fi
 
 # x86 or ARM
-if [[ $1 == "arm" ]]
-then
+if [[ $1 == "arm" ]]; then
 	# Docker image ARM
 	cp -f Dockerfile-arm Dockerfile
 	docker_image="odoh-docker-arm"
@@ -51,6 +66,7 @@ docker run -it -d \
 	-v /mnt/storage/zerotier-one:/var/lib/zerotier-one \
 	-v /mnt/storage/.local:/root/.local \
 	-v /mnt/storage/logs:/root/logs \
+	-v /mnt/storage/id:/root/.ssh \
 	--name $docker_image $docker_image /bin/bash
 echo "###"
 echo
