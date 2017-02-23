@@ -36,6 +36,12 @@ while [ ! -f /var/lib/zerotier-one/identity.secret ]; do
 done
 echo 
 echo "Success! Your ZeroTier address is [ `cat /var/lib/zerotier-one/identity.public | cut -d : -f 1` ]."
+echo
+echo
+echo " *** PLEASE NOTE: The first time you connect to the Our Data Our Hands Zerotier"
+echo " ***              network you will need to get authorization for your address."
+echo 
+echo
 echo "###"
 echo
 
@@ -68,7 +74,12 @@ if [[ -z "$user_exists" ]]; then
 		echo '' | $infinit_bin user create --name $infinit_user --key /root/.ssh/id_rsa --push
 		echo "Backup user"
 		$infinit_bin user export --full --name $infinit_user --output /root/.ssh/griduser
-		echo "You'll need a passport to activate your storage on the ODOH network"
+		echo
+		echo
+		echo " *** PLEASE NOTE: You'll need approved passport permissions to start contributing"
+		echo "                  your storage to humanity on the Our Data Our Hands network."
+		echo
+		echo
 
 	else
 		echo "Backup found, restore"
@@ -133,7 +144,8 @@ echo "ODOH: Check for linked network"
 network_linked="$($infinit_bin network list --as $infinit_user | grep $infinit_network | grep -v 'not linked')"
 if [[ -z "$network_linked" ]]; then
 	echo "Link $infinit_network network"
-	$infinit_bin network link --as $infinit_user --name $infinit_captain/$infinit_network --storage local
+	link="$infinit_bin network link --as $infinit_user --name $infinit_captain/$infinit_network --storage local | grep 'fatal error'"
+
 else
 	echo "Found network $network_linked"
 fi
