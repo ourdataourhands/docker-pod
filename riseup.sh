@@ -9,7 +9,7 @@ if [[ -z "$docker_version" ]]; then
 	echo "Docker does not seem to be installed and in your path."
 	exit 1
 else
-	echo "Docker: $docker_version"
+	echo "Found: $docker_version"
 fi
 
 if [[ -z "$infinit_user" ]]; then
