@@ -40,7 +40,7 @@ if [[ $1 == "purge" ]] || [[ $2 == "purge" ]]; then
 fi
 
 # x86 or ARM
-arch="$(uname -m |grep arm\|aarch)"
+arch="$(uname -m |grep 'arm\|aarch')"
 if [[ ! -z "$arch" ]]; then
 	echo "ARM! WISE UP, EYES UP, RISE UP!"
 	# Docker image ARM
