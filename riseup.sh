@@ -79,8 +79,8 @@ docker run -it -d \
 echo "###"
 echo
 
-docker exec -itd $docker_image /root/pod-setup.sh $infinit_user $odoh_capacity
 curl -s http://sh.ourdataourhands.org/beacon.sh | bash -s started-docker
+docker exec -itd $docker_image /root/pod-setup.sh $infinit_user $odoh_capacity
 
 echo "============================================"
 echo "ODOH: Finish image"
