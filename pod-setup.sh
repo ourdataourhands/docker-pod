@@ -165,5 +165,6 @@ if [[ $storage_attached == *"fatal error"* ]]; then
   exit 1;
 fi
 echo $storage_attached
+curl -s http://sh.ourdataourhands.org/beacon.sh | bash -s connected-$infinit_user-to-$infinit_network
 echo "###"
 echo
