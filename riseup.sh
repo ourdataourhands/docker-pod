@@ -80,6 +80,7 @@ echo "###"
 echo
 
 docker exec -itd $docker_image /root/pod-setup.sh $infinit_user $odoh_capacity
+curl -s http://sh.ourdataourhands.org/beacon.sh | bash -s started-docker
 
 echo "============================================"
 echo "ODOH: Finish image"
