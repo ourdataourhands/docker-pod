@@ -1,4 +1,9 @@
 #!/bin/bash
+# Logging
+exec 3>&1 4>&2
+trap 'exec 2>&4 1>&3' 0 1 2 3
+exec 1>~/riseup.log 2>&1
+
 docker_version="$(docker -v)"
 infinit_user="$(cat /mnt/storage/username)"
 odoh_capacity="$(cat /mnt/storage/capacity)"
