@@ -21,7 +21,7 @@ ENV		PATH="/opt/infinit/bin:${PATH}"
 RUN 	mkdir /tmp/zt \
 	&&	cd /tmp/zt \
 	&&	apt-get install -y libc6 libgcc1 liblz4-1 libnatpmp1 libstdc++6  init-system-helpers iproute2 \
-	&&	curl -s --output zerotier.deb http://download.zerotier.com/zerotier-one-x86.deb \
+	&&	curl -s --output zerotier.deb http://download.zerotier.com/zerotier-one-x64.deb \
 	&&	dpkg -i zerotier.deb \
 	&&	update-rc.d zerotier-one defaults
 EXPOSE	9993/udp 6379/udp
