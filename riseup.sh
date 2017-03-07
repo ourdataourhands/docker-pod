@@ -48,9 +48,15 @@ fi
 arch="$(uname -m)"
 
 case $arch in
+	'armv6l')
+		echo "ARMV6L! WISE UP, EYES UP, RISE UP!"
+		# Docker image ARM v6
+		cp -f Dockerfile-armv6l Dockerfile
+		docker_image="odoh-docker-armv6l"
+		;;
 	'armv7l')
 		echo "ARMV7L! WISE UP, EYES UP, RISE UP!"
-		# Docker image ARM
+		# Docker image ARM v7
 		cp -f Dockerfile-armv7l Dockerfile
 		docker_image="odoh-docker-armv7l"
 		;;
