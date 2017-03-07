@@ -44,20 +44,29 @@ if [[ $1 == "purge" ]] || [[ $2 == "purge" ]]; then
 	echo
 fi
 
-# x86 or ARM
-arch="$(uname -m |grep 'arm\|aarch')"
-if [[ ! -z "$arch" ]]; then
-	echo "ARM! WISE UP, EYES UP, RISE UP!"
-	# Docker image ARM
-	cp -f Dockerfile-arm Dockerfile
-	docker_image="odoh-docker-arm"
-else
-	echo "X86! WISE UP, EYES UP, RISE UP!"
-	# Default to x86
-	cp -f Dockerfile-x86 Dockerfile
-	docker_image="odoh-docker-x86"
-fi
+# Architecture
+arch="$(uname -m)"
 
+case $arch in
+	'armv7l')
+		echo "ARMV7L! WISE UP, EYES UP, RISE UP!"
+		# Docker image ARM
+		cp -f Dockerfile-armv7l Dockerfile
+		docker_image="odoh-docker-armv7l"
+		;;
+	'x86_64')
+		echo "X86_64! WISE UP, EYES UP, RISE UP!"
+		# Default to x86
+		cp -f Dockerfile-x86_64 Dockerfile
+		docker_image="odoh-docker-x86_64"
+		;;
+	*)
+		echo "X86! WISE UP, EYES UP, RISE UP!"
+		# Default to x86
+		cp -f Dockerfile-x86 Dockerfile
+		docker_image="odoh-docker-x86"
+		;;
+esac
 
 echo "============================================"
 echo "ODOH: Build image"
