@@ -5,8 +5,8 @@ trap 'exec 2>&4 1>&3' 0 1 2 3
 exec 1>~/riseup.log 2>&1
 
 docker_version="$(docker -v)"
-infinit_user="$(cat /mnt/storage/username)"
-odoh_capacity="$(cat /mnt/storage/capacity)"
+infinit_user="$(cat /mnt/storage/root/username)"
+odoh_capacity="$(cat /mnt/storage/root/capacity)"
 
 if [[ -z "$docker_version" ]]; then
 	echo "Docker does not seem to be installed and in your path."
