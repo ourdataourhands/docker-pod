@@ -87,14 +87,12 @@ docker run -it -d \
 	--cap-add=SYS_ADMIN \
 	--device=/dev/net/tun \
 	-v /mnt/storage/zerotier-one:/var/lib/zerotier-one \
-	-v /mnt/storage/.local:/root/.local \
-	-v /mnt/storage/logs:/root/logs \
-	-v /mnt/storage/id:/root/.ssh \
+	-v /mnt/storage/root:/root \
 	--name $docker_image $docker_image /bin/bash
 echo "###"
 echo
 
-docker exec -itd $docker_image /root/pod-setup.sh $infinit_user $odoh_capacity
+docker exec -itd $docker_image /tmp/pod-setup.sh $infinit_user $odoh_capacity
 
 echo "============================================"
 echo "ODOH: Finish image"

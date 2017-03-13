@@ -13,10 +13,8 @@ RUN     mkdir -p /opt/infinit \
 	&&	curl -q --output infinit.tbz https://storage.googleapis.com/sh_infinit_releases/linux64/Infinit-x86_64-linux_debian_oldstable-gcc4-0.7.3.tbz \
 	&&	tar xjf infinit.tbz --strip-components=1 -C . \
 	&&	rm infinit.tbz
-COPY 	pod-setup.sh /root/
-RUN 	chmod +x /root/pod-setup.sh
-RUN 	mkdir -p /root/logs
-RUN 	chmod +w /root/logs
+COPY 	pod-setup.sh /tmp/
+RUN 	chmod +x /tmp/pod-setup.sh
 ENV		PATH="/opt/infinit/bin:${PATH}"
 RUN 	mkdir /tmp/zt \
 	&&	cd /tmp/zt \
