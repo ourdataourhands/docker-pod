@@ -158,12 +158,13 @@ echo
 # Attach storage
 echo "============================================"
 echo "ODOH: Attach storage to the grid"
-storage_attached="$($infinit_bin network run --as $infinit_user --name $infinit_captain/$infinit_network --async --cache --publish)"
-if [[ $storage_attached == *"fatal error"* ]]; then
-  echo "Error attaching storage silo"
-  echo $storage_attached
-  exit 1;
-fi
-echo $storage_attached
-echo "###"
-echo
+$infinit_bin network run --as $infinit_user --name $infinit_captain/$infinit_network --async --cache --publish
+# storage_attached="$($infinit_bin network run --as $infinit_user --name $infinit_captain/$infinit_network --async --cache --publish)"
+# if [[ $storage_attached == *"fatal error"* ]]; then
+#   echo "Error attaching storage silo"
+#   echo $storage_attached
+#   exit 1;
+# fi
+# echo $storage_attached
+# echo "###"
+# echo

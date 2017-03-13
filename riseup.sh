@@ -33,13 +33,13 @@ fi
 if [[ $1 == "purge" ]] || [[ $2 == "purge" ]]; then
 	echo "============================================"
 	echo "ODOH: Stop and remove all Docker containers"
-	docker stop "$(docker ps -a -q)"
-	docker rm "$(docker ps -a -q)"
+	sudo docker stop "$(docker ps -a -q)"
+	sudo docker rm "$(docker ps -a -q)"
 	echo "###"
 	echo
 	echo "============================================"
 	echo "ODOH: Docker prune system"
-	docker system prune -f
+	sudo docker system prune -f
 	echo "###"
 	echo
 fi
