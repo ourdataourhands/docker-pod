@@ -107,21 +107,21 @@ echo
 # Network
 echo "============================================"
 echo "ODOH: Fetch networks"
-/opt/infinit/bin/infinit network fetch --as $infinit_user
+$infinit_bin network fetch --as $infinit_user
 echo "###"
 echo
 
 # Volume
 echo "============================================"
 echo "ODOH: Fetch volumes"
-/opt/infinit/bin/infinit volume fetch --as $infinit_user
+$infinit_bin volume fetch --as $infinit_user
 echo "###"
 echo
 
 # Passport
 echo "============================================"
 echo "ODOH: Fetch passports"
-/opt/infinit/bin/infinit passport fetch --as $infinit_user
+$infinit_bin passport fetch --as $infinit_user
 echo "###"
 echo
 
