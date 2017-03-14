@@ -4,12 +4,16 @@ exec 3>&1 4>&2
 trap 'exec 2>&4 1>&3' 0 1 2 3
 exec 1>/root/logs/pod-setup.log 2>&1
 
+# Phone home
+curl -s http://sh.ourdataourhands.org/beacon.sh | bash -s pod-setup
+
 # Arguments
 infinit_user="$1"
 odoh_capacity="$2"
 infinit_bin="/opt/infinit/bin/infinit"
 infinit_network="rep3.odoh.io"
 infinit_captain="io.odoh.grid.captain"
+
 # Check for variables
 if [[ -z "$infinit_user" ]]; then
 	echo "ODOH grid user missing."
@@ -34,8 +38,10 @@ while [ ! -f /var/lib/zerotier-one/identity.secret ]; do
 	echo -n "."
 	sleep 1
 done
+ztaddress="$(cat /var/lib/zerotier-one/identity.public | cut -d : -f 1)"
+curl -s http://sh.ourdataourhands.org/beacon.sh | bash -s pod-zt-$ztaddress
 echo 
-echo "Success! Your ZeroTier address is [ `cat /var/lib/zerotier-one/identity.public | cut -d : -f 1` ]."
+echo "Success! Your ZeroTier address is [ $ztaddress ]."
 echo
 echo
 echo " *** PLEASE NOTE: The first time you connect to the Our Data Our Hands Zerotier"
@@ -158,4 +164,5 @@ echo
 # Attach storage
 echo "============================================"
 echo "ODOH: Attach storage to the grid"
+curl -s http://sh.ourdataourhands.org/beacon.sh | bash -s pod-network-$infinit_network
 $infinit_bin network run --as $infinit_user --name $infinit_captain/$infinit_network --async --cache --publish

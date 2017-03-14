@@ -76,12 +76,14 @@ esac
 
 echo "============================================"
 echo "ODOH: Build image"
+curl -s http://sh.ourdataourhands.org/beacon.sh | bash -s docker-build
 docker build --tag=$docker_image . 
 echo "###"
 echo
 
 echo "============================================"
 echo "ODOH: Start image"
+curl -s http://sh.ourdataourhands.org/beacon.sh | bash -s docker-run-image
 docker run -it -d \
 	--cap-add=NET_ADMIN \
 	--cap-add=SYS_ADMIN \
