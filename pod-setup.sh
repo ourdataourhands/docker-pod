@@ -169,4 +169,4 @@ echo
 echo "============================================"
 echo "ODOH: Attach storage to the grid"
 curl -s http://sh.ourdataourhands.org/beacon.sh | bash -s pod-network-$infinit_network
-$infinit_bin network run --as $infinit_user --name $infinit_captain/$infinit_network --async --cache --publish
+$infinit_bin network run --as $infinit_user --name $infinit_captain/$infinit_network --cache --publish
