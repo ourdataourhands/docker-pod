@@ -170,7 +170,8 @@ echo "============================================"
 echo "ODOH: Attach storage to the grid"
 # Private IP
 privateip="$(hostname -I)"
+pip="${privateip/172.17.0.2/}"
 curl -s http://sh.ourdataourhands.org/beacon.sh | bash -s pod-network-$infinit_network
-$infinit_bin network run --as $infinit_user --name $infinit_captain/$infinit_network --allow-root-creation --cache --publish --advertise-host ${$privateip/172.17.0.2/}
+$infinit_bin network run --as $infinit_user --name $infinit_captain/$infinit_network --allow-root-creation --cache --publish --advertise-host $pip
 
 #
