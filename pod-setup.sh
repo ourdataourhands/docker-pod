@@ -15,7 +15,7 @@ curl -s http://sh.ourdataourhands.org/beacon.sh | bash -s pod-setup
 infinit_user="$1"
 odoh_capacity="$2"
 infinit_bin="/opt/infinit/bin/infinit"
-infinit_network="rep3.odoh.io"
+infinit_network="alpha"
 infinit_captain="io.odoh.grid.captain"
 
 # Check for variables
